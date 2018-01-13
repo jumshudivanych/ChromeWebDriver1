@@ -7,11 +7,12 @@ import java.util.concurrent.TimeUnit;
 public class ChromeDriver implements Runnable {
 
     private static org.openqa.selenium.chrome.ChromeDriver driver;
-    private static String url = "https://sandbox50572.wordpress.com/";//url загружаемои страницы
+    private static String url;//url загружаемои страницы
     private static String name;
 
-    public ChromeDriver(String name) {
+    public ChromeDriver(String name, String url) {
         this.name = name;
+        this.url = url;
     }
 
     public void run() {
@@ -23,8 +24,13 @@ public class ChromeDriver implements Runnable {
         //неявное ожидание действует всякий раз при поиске элемента
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        //url = "https://sandbox50572.wordpress.com";TODO обработать как настроики по умолчанию
         driver.get(url);
+        //пауза
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // WebElement hrefButton = driver.findElement(By.xpath("//button[text()='Автозагрузчик']"));//TODO проверить соответствие!!!
         WebElement hrefButton = driver.findElementByLinkText("Автозагрузчик");//находим элемент
         //нажать на кнопку
@@ -34,7 +40,7 @@ public class ChromeDriver implements Runnable {
 
         //TODO время задержки
         try {
-            Thread.sleep(120000);
+            Thread.sleep(30000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -13,23 +13,25 @@ public class App
 {
 
 
-    public static void main( String[] args )
-    {
-        //инициализация дочернего потока
-        Runnable ChromeDriver1 = new com.sandbox50572.ChromeDriver("ChromeDriver1");
+    public static void main( String[] args ) throws InterruptedException {
+        //создание объекта
+        Runnable chromeDriver1 = new com.sandbox50572.ChromeDriver("ChromeDriver1", "https://sandbox50572.wordpress.com/");
+        //создание дочернего потока
+        Thread thread2 = new Thread(chromeDriver1);
+        //стартуем новыи поток
+        thread2.start();
+
+        //Пауза
+        Thread.sleep(30000);
 
         //инициализация дочернего потока
-        Runnable ChromeDriver2 = new com.sandbox50572.ChromeDriver("ChromeDriver2");
+        Runnable chromeDriver2 = new com.sandbox50572.ChromeDriver("ChromeDriver2", "https://sandbox50572.wordpress.com/");
+        //создание дочернего потока
+        Thread thread3 = new Thread(chromeDriver2);
+        //стартуем новыи поток
+        thread3.start();
 
-        //цикл запускающий потки
-        for(int i=3; i>0; i--) {
-
-            //запуск первого потока
-            ChromeDriver1.run();
-
-            //запуск второго потока
-            ChromeDriver2.run();
-        }
+        System.out.println("Метод main завершен.");
 
     }
 }
